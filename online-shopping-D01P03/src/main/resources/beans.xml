@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define Battery bean -->
+    <bean id="battery" class="com.example.Battery">
+        <constructor-arg value="1"/>
+        <constructor-arg value="AAA Battery"/>
+        <constructor-arg value="true"/>
+    </bean>
+
+    <!-- Define Disc bean -->
+    <bean id="disc" class="com.example.Disc">
+        <constructor-arg value="2"/>
+        <constructor-arg value="DVD Disc"/>
+        <constructor-arg value="700"/>
+    </bean>
+</beans>

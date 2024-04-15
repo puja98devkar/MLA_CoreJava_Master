@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/jdbc
+           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- DataSource Configuration -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/passenger_app_db"/>
+        <property name="username" value="root"/>
+        <property name="password" value="myroot"/>
+    </bean>
+
+    <!-- JdbcTemplate Configuration -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- Define PassengerDao bean -->
+    <bean id="passengerDao" class="com.example.passengerapp.dao.PassengerDaoImpl">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <!-- Define PassengerService bean -->
+    <bean id="passengerService" class="com.example.passengerapp.service.PassengerServiceImpl">
+        <constructor-arg ref="passengerDao"/>
+    </bean>
+
+    <!-- Enable annotation-based configuration -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.example.passengerapp" />
+
+    <!-- Define Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- Enable transaction management -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

@@ -1,0 +1,57 @@
+
+mysql> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| bank_app                   |
+| banking_app                |
+| book                       |
+| complaint                  |
+| employee_management_system |
+| ems                        |
+| information_schema         |
+| mybook                     |
+| mysql                      |
+| performance_schema         |
+| sys                        |
++----------------------------+
+11 rows in set (0.04 sec)
+
+mysql> create datbase Passenger;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datbase Passenger' at line 1
+mysql> create database Passenger;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use Passenger;
+Database changed
+mysql> CREATE TABLE Passenger_Details (
+    ->     Passenger_id INT PRIMARY KEY,
+    ->     Passenger_name VARCHAR(255),
+    ->     Passenger_dob DATE,
+    ->     Passenger_phone BIGINT,
+    ->     Passenger_email VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO Passenger_Details (Passenger_id, Passenger_name, Passenger_dob, Passenger_phone, Passenger_email)
+    -> VALUES
+    ->     (1734, 'Anu', '2000-12-05', 9876543266, 'anu@gmail.com'),
+    ->     (1235, 'Vikas', '2001-01-05', 8876543266, 'vikas@gmail.com'),
+    ->     (1236, 'Sharmi', '2011-02-15', 9666543266, 'sharmi@gmail.com'),
+    ->     (1237, 'Nikitha', '1990-12-05', 9076543266, 'nikitha@email.com');
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Passenger_Details;
++--------------+----------------+---------------+-----------------+-------------------+
+| Passenger_id | Passenger_name | Passenger_dob | Passenger_phone | Passenger_email   |
++--------------+----------------+---------------+-----------------+-------------------+
+|         1235 | Vikas          | 2001-01-05    |      8876543266 | vikas@gmail.com   |
+|         1236 | Sharmi         | 2011-02-15    |      9666543266 | sharmi@gmail.com  |
+|         1237 | Nikitha        | 1990-12-05    |      9076543266 | nikitha@email.com |
+|         1734 | Anu            | 2000-12-05    |      9876543266 | anu@gmail.com     |
++--------------+----------------+---------------+-----------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql>INSERT INTO passenger (id,name,age)
+    VALUES(1,"puja",12);
